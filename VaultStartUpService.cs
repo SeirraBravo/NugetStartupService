@@ -20,7 +20,7 @@ namespace WebApplication1
         }
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Accessing remote vault and cachig the token......");
+            _logger.LogInformation("Accessing remote vault and caching the token......");
             string remoteUrl = _configuration["VaultConfig:Url"];
             try
             {
