@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+	  <GenerateAppxPackageOnBuild>true</GenerateAppxPackageOnBuild>
+	  <PackageId>PublixVaultProxy</PackageId>
+	  <Version>1.1.0.1</Version>
+	  <Description>Package for retriving and caching auth token from the vault</Description>
+	  <Authors></Authors>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DPAPICacheHelper" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.1" />
+  </ItemGroup>
+
+</Project>
