@@ -9,7 +9,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IVaultProxyService, VaultProxyService>();
+//builder.Services.AddSingleton<IVaultProxyService, VaultProxyService>();
+var vaultUrl = builder.Configuration["VaultConfig:Url"];
+builder.Services.AddSingleton<IVaultProxyService>(sp => new VaultProxyService(vaultUrl));
 builder.Services.AddHostedService<VaultStartUpService>();
 
 var app = builder.Build();

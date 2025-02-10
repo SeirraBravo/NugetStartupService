@@ -8,24 +8,18 @@ namespace PublixVaultProxy
 {
     public interface IVaultProxyService
     {
-        Task<bool> RetrieveSecretFromRemoteVaultAsync(string VaultUrl);
+        Task<bool> RetrieveSecretFromRemoteVaultAsync();
+        string VaultUrl { get; set; }
     }
     public class VaultProxyService : IVaultProxyService
     {
-        private readonly IConfiguration _configuration;
-        private readonly ILogger<VaultProxyService> _logger;
         private static readonly HttpClient _httpClient = new HttpClient();
+        public string VaultUrl { get; set; }    
 
-        public VaultProxyService(IConfiguration configuration, ILogger<VaultProxyService> logger)
+        public VaultProxyService(string vaultUrl)
         {
-            _configuration = configuration;
-            _logger = logger;
-            var VaultConfig = _configuration.GetSection("VaultConfig");
-            string vaultUrl = VaultConfig["VaultUrl"];
-            //string vaultToken = VaultConfig["VaultToken"];
-            _httpClient.DefaultRequestHeaders.Add("X-Vault-Token", VaultConfig["VaultToken"]);
+           VaultUrl = vaultUrl;
         }
-
 
 
         /// <summary>
@@ -35,13 +29,13 @@ namespace PublixVaultProxy
         /// </summary>
 
 
-
-        public async Task<bool> RetrieveSecretFromRemoteVaultAsync(string VaultUrl)
+        public async Task<bool> RetrieveSecretFromRemoteVaultAsync()
         {
 
             try
             {
                 var response = await _httpClient.GetAsync(VaultUrl);
+                await Task.Delay(500);
                 response.EnsureSuccessStatusCode();
                 string secret = await response.Content.ReadAsStringAsync();
                 if (secret != null)
@@ -53,14 +47,12 @@ namespace PublixVaultProxy
                 }
                 else
                 {
-                    _logger.LogError("Error while accessing the vault");
                     _httpClient.Dispose();
                     return false;
                 }
             }
             catch (HttpRequestException)
             {
-                _logger.LogError("Error while accessing the vault");
                 _httpClient.Dispose();
                 return false;
 

@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
 	  <GenerateAppxPackageOnBuild>true</GenerateAppxPackageOnBuild>
 	  <PackageId>PublixVaultProxy</PackageId>
-	  <Version>1.1.0.1</Version>
+	  <Version>1.1.0.3</Version>
 	  <Description>Package for retriving and caching auth token from the vault</Description>
 	  <Authors></Authors>
     <ImplicitUsings>enable</ImplicitUsings>

@@ -20,11 +20,10 @@ namespace WebApplication1
         }
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Accessing remote vault and caching the token......");
-            string remoteUrl = _configuration["VaultConfig:Url"];
+          
             try
             {
-                bool res = await _vaultProxy.RetrieveSecretFromRemoteVaultAsync(remoteUrl);
+                bool res = await _vaultProxy.RetrieveSecretFromRemoteVaultAsync();
                 if (!res)
                 {
                     _logger.LogError("Error occurd while caching the token ");
