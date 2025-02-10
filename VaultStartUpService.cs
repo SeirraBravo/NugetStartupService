@@ -28,11 +28,14 @@ namespace WebApplication1
                 {
                     _logger.LogError("Error occurd while caching the token ");
                 }
-                _logger.LogInformation("Vault token cached successfully!");
+                else
+                {
+                    _logger.LogInformation("Vault token cached successfully!");
+                }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occurd while caching the token ");
+                _logger.LogError(ex, "Exception Occurred ");
             }
         }
 
