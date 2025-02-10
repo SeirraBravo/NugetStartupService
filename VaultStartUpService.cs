@@ -26,7 +26,7 @@ namespace WebApplication1
                 bool res = await _vaultProxy.RetrieveSecretFromRemoteVaultAsync();
                 if (!res)
                 {
-                    _logger.LogError("Error occurd while caching the token ");
+                    _logger.LogError("Error occurd while caching the token. Check the vault configuration");
                 }
                 else
                 {
