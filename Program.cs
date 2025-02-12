@@ -10,7 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var vaultUrl = builder.Configuration["VaultConfig:Url"];
-builder.Services.AddSingleton<IVaultProxyService>(sp => new VaultProxyService(vaultUrl));
+var client = new HttpClient();
+builder.Services.AddSingleton<IVaultProxyService>(sp => new VaultProxyService(vaultUrl, client));
 builder.Services.AddHostedService<VaultStartUpService>();
 
 var app = builder.Build();
